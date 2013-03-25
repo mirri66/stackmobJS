@@ -1,47 +1,20 @@
-<html>
-	<head>
-    <title>Check list</title>
-    <link href="http://www.stackmob.com/platform/favicon.ico" type="image/vnd.microsoft.icon" rel="icon" />
-    <link href="http://www.stackmob.com/platform/favicon.png" type="image/png" rel="icon" />
-    <link rel="stylesheet" href="index.css" />
-    <style type="text/css" media="screen">
-      /* <![CDATA[ */
-        li { padding-top: 10px; }
+/* <![CDATA[ */
+      // Initialize StackMob object
+      // Copy your init data from here: https://dashboard.stackmob.com/sdks/js/config
+      // Your other app information is here: https://dashboard.stackmob.com/settings
+      StackMob.init({
+        appName: 'checkcheck',
+        clientSubdomain: 'tsmgracegmailcom',
+        publicKey: '3b23062f-a93f-4cc5-8519-20beede78d4a',
+        apiVersion : 0
+      });
       /* ]]> */
-    </style>
-		<!--
-		*************************************
-		STACKMOB JS SDK DEPENDENCIES
-		Include these in your pages where you want to use the StackMob js sdk
-		*************************************
-		-->
-		 <script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
-	    <script type="text/javascript" src="http://static.stackmob.com/js/json2-min.js"></script>
-	    <script type="text/javascript" src="http://static.stackmob.com/js/underscore-1.3.3-min.js"></script>
-	    <script type="text/javascript" src="http://static.stackmob.com/js/backbone-0.9.2-min.js"></script>
-	    <script type="text/javascript" src="http://static.stackmob.com/js/2.5.3-crypto-sha1-hmac.js"></script>
-	    <script type="text/javascript" src="http://static.stackmob.com/js/stackmob-js-0.5.5-min.js"></script>
-		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-		<script type="text/javascript" src="http://static.stackmob.com/js/stackmob-js-0.8.1-bundled-min.js"></script>
-
 
 		<!--
 		*************************************
-		INITIALIZE THE JS SDK BELOW
-
-		Copy/Paste the init method from:
-		https://dashboard.stackmob.com/sdks/js/config
+		StackMob JS SDK code that creates and saves a TestObject
 		*************************************
 		-->
-
-		<script type="text/javascript" src="init.js"></script>
-
-		<!--
-		*************************************
-		StackMob JS SDK code 
-		*************************************
-		-->
-		<script type="text/javascript">
       /* <![CDATA[ */
       $(document).ready(function() {
 
@@ -229,49 +202,3 @@
             Backbone.history.start();           
         });
 
-
-		</script>
-
-    <script type="text/template" id="item-home">
-      <div class="container">
-        <div class="page-header">
-            <h1>Movies?!</h1>
-        </div>
-        <div class="row">
-          <div class="span4">
-                
-          </div>
-        </div>
-      </div>
-    </script>
-
-    <script type="text/template" id="item-edit">
-      <form class="form-horizontal" method="post">
-        <fieldset>
-          <legend>Movie Detail</legend>
-          <div class="control-group">
-            <label class="control-label" for="input01">Name:</label>
-            <div class="controls">
-              <input type="text" class="input-xlarge addName" id="name" name="name" value="<%= name %>">
-            </div>
-          </div>
-          <div class="control-group">
-            
-            <div class="controls">
-               <a href="#" id="cancelBtn" class="btn">close</a>
-               <a href="#" id="saveBtn" class="btn">save</a>
-            </div>
-          </div>
-          
-        </fieldset>
-      </form>
-    </script>
-
-    <script type="text/template" id="item-list">
-        <li><a href="#update/<%= movies_id %>"><%= name %></a></li>
-    </script>
-   
-</head> 
-
-<body></body>
-</html>

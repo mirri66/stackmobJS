@@ -5,4 +5,4 @@ Heavily references <a href="https://github.com/SidneyAllen/backbonedemo/blob/mas
 feature wishlist:
 
 * delete items
-
+* auto refresh page at fixed interval
