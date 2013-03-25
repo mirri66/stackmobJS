@@ -1,6 +1,6 @@
 <html>
 	<head>
-    <title>Your First API Call</title>
+    <title>Check list</title>
     <link href="http://www.stackmob.com/platform/favicon.ico" type="image/vnd.microsoft.icon" rel="icon" />
     <link href="http://www.stackmob.com/platform/favicon.png" type="image/png" rel="icon" />
     <link rel="stylesheet" href="index.css" />
@@ -217,7 +217,8 @@
                 "":"home",
                 "add":"add",
                 "update/:id":"update"
-            },
+        //	"delete/:id":"delete" 
+	   },
 
             home:function() {
               new HomeView();
@@ -231,6 +232,10 @@
               model = movies.get(e);
               new UpdateView({model: model});
             }
+
+	    // delete:function(e){
+	    //  alert("test");
+	    //} 
           });
 
         }(jQuery));
@@ -279,7 +284,7 @@
     </script>
 
     <script type="text/template" id="item-list">
-        <li><a href="#update/<%= movies_id %>"><%= name %></a></li>
+        <li><a href="#update/<%= movies_id %>"><%= name %></a> [<span class="delete"><a href="#delete/<%= movies_id %>">delete</a></span>]</li>
     </script>
    
 </head> 
