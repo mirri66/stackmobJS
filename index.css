@@ -8,6 +8,10 @@ code { font-weight: bold; }
 	display: none;
 }
 
+.delete {
+	font-size: 1px;
+}
+
 .button, .button a
 {
 	background: #98be47;
