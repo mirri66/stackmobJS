@@ -86,6 +86,7 @@
               tagName: 'ul',
               className : 'nav nav-list',
 
+
               initialize: function() {
                   this.collection.bind('all', this.render,this);
                   this.template = _.template($('#item-list').html());
@@ -105,7 +106,9 @@
                 el.append('<span id="addnew"><br><a href="#add">add new movie</a></span>');
                 
                 return this;
-              }
+              },
+
+
           });
       
   
@@ -209,7 +212,9 @@
                 "":"home",
                 "add":"add",
                 "update/:id":"update",
-        	"delete/:id":"delete" 
+        	"delete/:id":"delete", 
+		"upvote/:id":"upvote",
+		"downvote/:id":"downvote"
 	   },
 
             home:function() {
@@ -228,7 +233,26 @@
 	    delete:function(e){
 		model = movies.get(e);
 		model.destroy();
-	    } 
+	    },
+
+	    upvote:function(e) {
+              model = movies.get(e);
+                newvotes = model.get('votes')+1;
+                model.save({votes: newvotes},{
+                success: function(model) {}
+              });
+              return this;
+            },
+
+	    downvote:function(e) {
+              model = movies.get(e);
+                newvotes = model.get('votes')-1;
+                model.save({votes: newvotes},{
+                success: function(model) {}
+              });
+              return this;
+            },
+ 
           });
 
         }(jQuery));
@@ -247,7 +271,7 @@
             <h1>What the @*^$% are we watching tonight?!</h1>
         </div>
         <div class="row">
-	    <a href="javascript:void(0);" id="login">Log into Facebook</a>
+<!--	    <a href="javascript:void(0);" id="login">Login with Facebook</a>-->
 	    <div id="fb-root"></div>
           <div class="span4 mainlist">
                 
@@ -280,7 +304,7 @@
 
     <script type="text/template" id="item-list">
         <li>
-	    <a href="#upvote">^</a><%= votes %><a href="#downvote">v</a>
+	    <a href="#upvote/<%= movies_id %>">^</a><%= votes %><a href="#downvote/<%= movies_id %>">v</a>
 	    <a href="#update/<%= movies_id %>"><%= name %></a> 
 	    <span class="delete">[<a href="#delete/<%= movies_id %>">delete</a>]</span>
 	</li>
