@@ -5,6 +5,7 @@
     <link href="http://www.stackmob.com/platform/favicon.png" type="image/png" rel="icon" />
     <link rel="stylesheet" href="index.css" />
     <link href='http://fonts.googleapis.com/css?family=Loved+by+the+King' rel='stylesheet' type='text/css'>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <style type="text/css" media="screen">
       /* <![CDATA[ */
         li { padding-top: 10px; }
@@ -35,7 +36,7 @@
 		*************************************
 		-->
 
-		<script type="text/javascript" src="init.js"></script>
+		<script type="text/javascript" src="js/init.js"></script>
 
 		<!--
 		*************************************
@@ -87,12 +88,12 @@
               tagName: 'ul',
               className : 'nav nav-list',
 
-
               initialize: function() {
                   this.collection.bind('all', this.render,this);
                   this.template = _.template($('#item-list').html());
               },
 
+	   // sortByVote: function (a,b) { return a.votes - b.votes;},
               render:function (eventName) {
                 var template = this.template,
                           el = this.$el,
@@ -100,7 +101,8 @@
                 
                 $(".span4 ul").empty();
                 
-                collection.each(function(activ){
+		collection.each(function(activ){
+             //   collection.sort(sortByVote).each(function(activ){
                     el.append(template(activ.toJSON()));
                 });
 
@@ -108,7 +110,6 @@
                 
                 return this;
               },
-
 
           });
       

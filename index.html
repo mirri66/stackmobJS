@@ -1,6 +1,7 @@
 <html>
 	<head>
-    <title>Check list</title>
+
+    <title>plans plans</title>
     <link href="http://www.stackmob.com/platform/favicon.ico" type="image/vnd.microsoft.icon" rel="icon" />
     <link href="http://www.stackmob.com/platform/favicon.png" type="image/png" rel="icon" />
     <link rel="stylesheet" href="index.css" />
@@ -35,6 +36,7 @@
 		*************************************
 		-->
 
+		<script type="text/javascript" src="fbinit.js"></script>
 		<script type="text/javascript" src="init.js"></script>
 
 		<!--
@@ -270,9 +272,10 @@
       <div class="container">
         <div class="page-header">
             <h1><span id="header">What the @*^$% are we watching tonight?!</span></h1>
+
         </div>
         <div class="row">
-<!--	    <a href="javascript:void(0);" id="login">Login with Facebook</a>-->
+<!--    <a href="javascript:void(0);" id="login">Login with Facebook</a>-->
 	    <div id="fb-root"></div>
           <div class="span4 mainlist">
                 
@@ -314,35 +317,6 @@
 </head> 
 
 
-<script type="text/javascript">
-  function login() {
-    //Login with Facebook
-    FB.login(function(response) {
-      if (response.authResponse) {
-        var accessToken = response.authResponse.accessToken;
- 
-        FB.api('/me', function(response) {
-          var user = new StackMob.User({ username: response.email });
-          user.createUserWithFacebook(accessToken, {
-            success: function(model) {
-              console.debug(model);
-            },
-            error: function(model, response) {
-              console.debug(model);
-              console.debug(response);
-            }
-          });
-        });
- 
-      } else {
-        console.log('User cancelled login or did not fully authorize.');
-      }
-    }, {scope: 'email'});
-  }
- 
-  $('#login').click(function() {
-    login();
-  });
-</script>
+<script type="text/javascript" src="js/fblogin.js"></script>
 <body></body>
 </html>
