@@ -304,9 +304,10 @@
 
     <script type="text/template" id="item-list">
         <li>
-	    <a href="#upvote/<%= movies_id %>">^</a><%= votes %><a href="#downvote/<%= movies_id %>">v</a>
-	    <a href="#update/<%= movies_id %>"><%= name %></a> 
-	    <span class="delete">[<a href="#delete/<%= movies_id %>">delete</a>]</span>
+	    <a href="#upvote/<%= movies_id %>">^</a><br>
+	    <%= votes %><a href="#update/<%= movies_id %>">&nbsp;&nbsp;&nbsp;&nbsp;<%= name %></a><br> 
+	    <a href="#downvote/<%= movies_id %>">v</a>
+	    <span class="delete">&nbsp;&nbsp;&nbsp;&nbsp;[<a href="#delete/<%= movies_id %>">delete</a>]</span>
 	</li>
     </script>
 </head> 
