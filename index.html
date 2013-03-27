@@ -47,7 +47,9 @@
 
 
           var Movie = StackMob.Model.extend({
-            schemaName: "movies"
+            schemaName: "movies",
+	    title: "",
+	    votes: 1
           });
             
 	var Movies = StackMob.Collection.extend({
@@ -100,9 +102,10 @@
                 
                 collection.each(function(movie){
                     el.append(template(movie.toJSON()));
+		    el.append('<b>' + movie.get('votes') + '</b>');
                 });
 
-                el.append('<li><a href="#add">add new movie</a></li>');
+                el.append('<span id="addnew"><br><a href="#add">add new movie</a></span>');
                 
                 return this;
               }
@@ -165,7 +168,6 @@
             events: {
                "click #saveBtn": "save",  
                "keypress .addName":  "onEnter"
-	//	"click #deleteBtn": "del"
 	    },
 
             initialize: function() {
@@ -181,12 +183,6 @@
               return this;
             },
 
-	 /*   del: function(e) {
-		this.model.destroy(
-		
-		);
-	    },
-*/
             onEnter: function(e) {
               if (e.keyCode == 13) {
                 this.save(e); 
@@ -251,7 +247,9 @@
             <h1>What the @*^$% are we watching tonight?!</h1>
         </div>
         <div class="row">
-          <div class="span4">
+	    <a href="javascript:void(0);" id="login">Log into Facebook</a>
+	    <div id="fb-root"></div>
+          <div class="span4 mainlist">
                 
           </div>
         </div>
@@ -283,8 +281,38 @@
     <script type="text/template" id="item-list">
         <li><a href="#update/<%= movies_id %>"><%= name %></a> <span class="delete">[<a href="#delete/<%= movies_id %>">delete</a>]</span></li>
     </script>
-   
 </head> 
 
+
+<script type="text/javascript">
+  function login() {
+    //Login with Facebook
+    FB.login(function(response) {
+      if (response.authResponse) {
+        var accessToken = response.authResponse.accessToken;
+ 
+        FB.api('/me', function(response) {
+          var user = new StackMob.User({ username: response.email });
+          user.createUserWithFacebook(accessToken, {
+            success: function(model) {
+              console.debug(model);
+            },
+            error: function(model, response) {
+              console.debug(model);
+              console.debug(response);
+            }
+          });
+        });
+ 
+      } else {
+        console.log('User cancelled login or did not fully authorize.');
+      }
+    }, {scope: 'email'});
+  }
+ 
+  $('#login').click(function() {
+    login();
+  });
+</script>
 <body></body>
 </html>

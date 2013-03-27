@@ -4,5 +4,6 @@ Heavily references <a href="https://github.com/SidneyAllen/backbonedemo/blob/mas
 
 feature wishlist:
 
-* delete items
+* facebook login
+* voting (what is this, a democracy?!)
 * auto refresh page at fixed interval
