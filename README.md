@@ -5,5 +5,8 @@ Heavily references <a href="https://github.com/SidneyAllen/backbonedemo/blob/mas
 feature wishlist:
 
 * facebook login
-* voting (what is this, a democracy?!)
-* auto refresh page at fixed interval
+* vote logic (no negative votes, one per user per movie, etc)
+* sort by votes
+* media screen auto adjust size
+* css
+* auto refresh page at fixed interval (is this necessary?)

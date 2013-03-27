@@ -1,5 +1,7 @@
 body {
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    //background-image:url('/images/fabric-of-squares_gray.png');
+    background-color:#cccccc;
 }
 
 code { font-weight: bold; }
@@ -70,7 +72,7 @@ code { font-weight: bold; }
 .mainlist a {text-decoration: none;}
 .mainlist li {list-style-type: none;}
 
-
+#header{ font-family: 'Loved by the King', cursive;}
 
 #addnew a{
     text-decoration: none;

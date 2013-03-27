@@ -47,16 +47,16 @@
       $(document).ready(function() {
 
 
-          var Movie = StackMob.Model.extend({
-            schemaName: "movies"
+          var Activ = StackMob.Model.extend({
+            schemaName: "activs"
           });
             
-	var Movies = StackMob.Collection.extend({
-              model: Movie
+	var Activs = StackMob.Collection.extend({
+              model: Activ
 	});
 
-	var movies = new Movies();
-         movies.fetch({async: true});
+	var activs = new Activs();
+         activs.fetch({async: true});
 
           var HomeView = Backbone.View.extend({
            
@@ -74,7 +74,7 @@
               el.empty();
               el.append(this.template());
 
-              var listView = new ListView({collection:movies});
+              var listView = new ListView({collection:activs});
               $('.span4').append(listView.render().el);
 
               return this;
@@ -100,11 +100,11 @@
                 
                 $(".span4 ul").empty();
                 
-                collection.each(function(movie){
-                    el.append(template(movie.toJSON()));
+                collection.each(function(activ){
+                    el.append(template(activ.toJSON()));
                 });
 
-                el.append('<span id="addnew"><br><a href="#add">add new movie</a></span>');
+                el.append('<span id="addnew"><br><a href="#add">add new activ</a></span>');
                 
                 return this;
               },
@@ -146,12 +146,12 @@
               var collection = this.collection;
               e.preventDefault();
 
-	      var movie = new Movie({
+	      var activ = new Activ({
 		name:$('#name').val(), 
 		votes:1
 	      });
 
-              movie.create({
+              activ.create({
                 success: function(model){
                     collection.add(model);
                 }
@@ -223,21 +223,21 @@
             },
 
             add:function() {
-              new AddView({collection:movies});
+              new AddView({collection:activs});
             },
 
             update:function(e) {
-              model = movies.get(e);
+              model = activs.get(e);
               new UpdateView({model: model});
             },
 
 	    delete:function(e){
-		model = movies.get(e);
+		model = activs.get(e);
 		model.destroy();
 	    },
 
 	    upvote:function(e) {
-              model = movies.get(e);
+              model = activs.get(e);
                 newvotes = model.get('votes')+1;
                 model.save({votes: newvotes},{
                 success: function(model) {}
@@ -246,7 +246,7 @@
             },
 
 	    downvote:function(e) {
-              model = movies.get(e);
+              model = activs.get(e);
                 newvotes = model.get('votes')-1;
                 model.save({votes: newvotes},{
                 success: function(model) {}
@@ -259,7 +259,7 @@
         }(jQuery));
 
         $(document).ready(function () {
-            movieApp = new AppRouter();
+            activApp = new AppRouter();
             Backbone.history.start();           
         });
 
@@ -269,7 +269,7 @@
     <script type="text/template" id="item-home">
       <div class="container">
         <div class="page-header">
-            <h1><span id="header">What the @*^$% are we watching tonight?!</span></h1>
+            <h1><span id="header">What the @*^$% are we doing this weekend?!</span></h1>
         </div>
         <div class="row">
 <!--	    <a href="javascript:void(0);" id="login">Login with Facebook</a>-->
@@ -284,7 +284,7 @@
     <script type="text/template" id="item-edit">
       <form class="form-horizontal" method="post">
         <fieldset>
-          <legend>Movie Detail</legend>
+          <legend>Activity Detail</legend>
           <div class="control-group">
             <label class="control-label" for="input01">Name:</label>
             <div class="controls">
@@ -305,10 +305,10 @@
 
     <script type="text/template" id="item-list">
         <li>
-	    <a href="#upvote/<%= movies_id %>">^</a><br>
-	    <%= votes %><a href="#update/<%= movies_id %>">&nbsp;&nbsp;&nbsp;&nbsp;<%= name %></a><br> 
-	    <a href="#downvote/<%= movies_id %>">v</a>
-	    <span class="delete">&nbsp;&nbsp;&nbsp;&nbsp;[<a href="#delete/<%= movies_id %>">delete</a>]</span>
+	    <a href="#upvote/<%= activs_id %>">^</a><br>
+	    <%= votes %><a href="#update/<%= activs_id %>">&nbsp;&nbsp;&nbsp;&nbsp;<%= name %></a><br> 
+	    <a href="#downvote/<%= activs_id %>">v</a>
+	    <span class="delete">&nbsp;&nbsp;&nbsp;&nbsp;[<a href="#delete/<%= activs_id %>">delete</a>]</span>
 	</li>
     </script>
 </head> 
