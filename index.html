@@ -36,8 +36,8 @@
 		*************************************
 		-->
 
-		<script type="text/javascript" src="fbinit.js"></script>
-		<script type="text/javascript" src="init.js"></script>
+		<script type="text/javascript" src="js/fbinit.js"></script>
+		<script type="text/javascript" src="js/init.js"></script>
 
 		<!--
 		*************************************
@@ -54,7 +54,10 @@
           });
             
 	var Movies = StackMob.Collection.extend({
-              model: Movie
+            model: Movie,
+	    comparator: function(item) {
+		return -item.get('votes');
+	    }
 	});
 
 	var movies = new Movies();
@@ -101,7 +104,8 @@
                   collection = this.collection;
                 
                 $(".span4 ul").empty();
-                
+               
+ 
                 collection.each(function(movie){
                     el.append(template(movie.toJSON()));
                 });

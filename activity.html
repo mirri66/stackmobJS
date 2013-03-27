@@ -53,7 +53,10 @@
           });
             
 	var Activs = StackMob.Collection.extend({
-              model: Activ
+            model: Activ,
+    	    comparator: function(item) { 
+                return -item.get('votes');
+            }
 	});
 
 	var activs = new Activs();
