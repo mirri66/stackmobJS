@@ -100,7 +100,6 @@
                 
                 collection.each(function(movie){
                     el.append(template(movie.toJSON()));
-		    el.append('<b>' + movie.get('votes') + '</b>');
                 });
 
                 el.append('<span id="addnew"><br><a href="#add">add new movie</a></span>');
@@ -280,7 +279,11 @@
     </script>
 
     <script type="text/template" id="item-list">
-        <li><a href="#update/<%= movies_id %>"><%= name %></a> <span class="delete">[<a href="#delete/<%= movies_id %>">delete</a>]</span></li>
+        <li>
+	    <a href="#upvote">^</a><%= votes %><a href="#downvote">v</a>
+	    <a href="#update/<%= movies_id %>"><%= name %></a> 
+	    <span class="delete">[<a href="#delete/<%= movies_id %>">delete</a>]</span>
+	</li>
     </script>
 </head> 
 

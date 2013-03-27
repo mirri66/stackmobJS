@@ -10,6 +10,7 @@ StackMob.init({
 });
 
 // Facebook app init
+/*
 window.fbAsyncInit = function() {
   FB.init({
     appId      : '481440575256369'
@@ -29,4 +30,4 @@ window.fbAsyncInit = function() {
    js.src = '//connect.facebook.net/en_US/all.js';
    d.getElementsByTagName('head')[0].appendChild(js);
  }(document));
-
+*/
