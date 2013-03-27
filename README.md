@@ -6,7 +6,6 @@ feature wishlist:
 
 * facebook login
 * vote logic (no negative votes, one per user per movie, etc)
-* sort by votes
-* media screen auto adjust size
-* css
-* auto refresh page at fixed interval (is this necessary?)
+* media screen auto adjust size (need to test)
+* tackle ugliness - css
+* auto refresh page at fixed interval, or re-render after event
