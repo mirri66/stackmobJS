@@ -48,8 +48,6 @@
 
           var Movie = StackMob.Model.extend({
             schemaName: "movies",
-	    title: "",
-	    votes: 1
           });
             
 	var Movies = StackMob.Collection.extend({
@@ -145,7 +143,10 @@
               var collection = this.collection;
               e.preventDefault();
 
-              var movie = new Movie({name:$('#name').val() });
+	      var movie = new Movie({
+		name:$('#name').val(), 
+		votes:1
+	      });
 
               movie.create({
                 success: function(model){
