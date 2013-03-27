@@ -2,6 +2,12 @@
 
 Heavily references <a href="https://github.com/SidneyAllen/backbonedemo/blob/master/index.html">Sidney Allen's Backbone.js and stackmob tutorial</a>
 
+additional features:
+* delete
+* voting
+* sort by votes
+
+
 feature wishlist:
 
 * facebook login

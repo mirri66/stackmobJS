@@ -277,7 +277,7 @@
         </div>
         <div class="row">
 <!--	    <a href="javascript:void(0);" id="login">Login with Facebook</a>-->
-<p>click item to update<br>arrows = upvote and downvote<br>now sorts by votes!<br></p>
+<p>add new suggestions using link at the bottom of the list<br>click item to update<br>arrows = upvote and downvote (now sorts by votes!)<br></p>
 	    <div id="fb-root"></div>
           <div class="span4 mainlist">
                 
@@ -319,35 +319,6 @@
 </head> 
 
 
-<script type="text/javascript">
-  function login() {
-    //Login with Facebook
-    FB.login(function(response) {
-      if (response.authResponse) {
-        var accessToken = response.authResponse.accessToken;
- 
-        FB.api('/me', function(response) {
-          var user = new StackMob.User({ username: response.email });
-          user.createUserWithFacebook(accessToken, {
-            success: function(model) {
-              console.debug(model);
-            },
-            error: function(model, response) {
-              console.debug(model);
-              console.debug(response);
-            }
-          });
-        });
- 
-      } else {
-        console.log('User cancelled login or did not fully authorize.');
-      }
-    }, {scope: 'email'});
-  }
- 
-  $('#login').click(function() {
-    login();
-  });
-</script>
+<script type="text/javascript" src="js/fblogin.js"></script>
 <body></body>
 </html>
