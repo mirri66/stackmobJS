@@ -1,7 +1,6 @@
 body {
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-    //background-image:url('/images/fabric-of-squares_gray.png');
-    background-color:#cccccc;
+    background-image:url('images/fabric_of_squares_gray.png');
 }
 
 code { font-weight: bold; }

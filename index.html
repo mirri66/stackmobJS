@@ -44,233 +44,7 @@
 		StackMob JS SDK code 
 		*************************************
 		-->
-		<script type="text/javascript">
-      /* <![CDATA[ */
-      $(document).ready(function() {
-
-
-          var Movie = StackMob.Model.extend({
-            schemaName: "movies"
-          });
-            
-	var Movies = StackMob.Collection.extend({
-            model: Movie,
-	    comparator: function(item) {
-		return -item.get('votes');
-	    }
-	});
-
-	var movies = new Movies();
-         movies.fetch({async: true});
-
-          var HomeView = Backbone.View.extend({
-           
-            el: 'body',
-
-            initialize: function() {
-              this.template = _.template($('#item-home').html());
-              this.render();
-            },
-
-            render: function() {
-
-              var el = this.$el
-
-              el.empty();
-              el.append(this.template());
-
-              var listView = new ListView({collection:movies});
-              $('.span4').append(listView.render().el);
-
-              return this;
-            }
-   
-          });
-
-          var ListView = Backbone.View.extend({
-              
-              tagName: 'ul',
-              className : 'nav nav-list',
-
-
-              initialize: function() {
-                  this.collection.bind('all', this.render,this);
-                  this.template = _.template($('#item-list').html());
-              },
-
-              render:function (eventName) {
-                var template = this.template,
-                          el = this.$el,
-                  collection = this.collection;
-                
-                $(".span4 ul").empty();
-               
- 
-                collection.each(function(movie){
-                    el.append(template(movie.toJSON()));
-                });
-
-                el.append('<span id="addnew"><br><a href="#add">add new movie</a></span>');
-                
-                return this;
-              },
-
-
-          });
-      
-  
-          var AddView = Backbone.View.extend({
-
-            className:"span8",
-            tagName: "div",
-
-            events: {
-               "click #saveBtn": "save",  
-               "keypress .addName":  "onEnter"
-            },
-
-            initialize: function() {
-              this.template = _.template($('#item-edit').html());
-              this.collection = this.options.collection;
-              this.render();
-            },
-
-            render: function() {
-              $('.span8').remove();
-              $(this.el).html(this.template());
-              $('.row').append(this.el);
-              return this;
-            },
-
-            onEnter: function(e) {
-              if (e.keyCode == 13) {
-                this.save(e); 
-              }
-            },
-
-            save: function(e) {
-              var collection = this.collection;
-              e.preventDefault();
-
-	      var movie = new Movie({
-		name:$('#name').val(), 
-		votes:1
-	      });
-
-              movie.create({
-                success: function(model){
-                    collection.add(model);
-                }
-              });  
-
-              $('#name').val('');   
-              
-              return this;
-            }
-
-          });
-
-          var UpdateView = Backbone.View.extend({
-
-            className:"span8",
-            tagName: "div",
-
-            events: {
-               "click #saveBtn": "save",  
-               "keypress .addName":  "onEnter"
-	    },
-
-            initialize: function() {
-              this.template = _.template($('#item-edit').html());
-              this.model = this.options.model;
-              this.render();
-            },
-
-            render: function() {
-              $('.span8').remove();
-              $(this.el).html(this.template(this.model.toJSON()));
-              $('.row').append(this.el);
-              return this;
-            },
-
-            onEnter: function(e) {
-              if (e.keyCode == 13) {
-                this.save(e); 
-              }
-            },
-
-            save: function(e) {
-              e.preventDefault();
-
-              this.model.save({name:$('#name').val()},{
-                success: function(model) {
-                  
-                }
-              });
-              
-              return this;
-            }
-
-          });
-
-          AppRouter = Backbone.Router.extend({
-
-            routes:{
-                "":"home",
-                "add":"add",
-                "update/:id":"update",
-        	"delete/:id":"delete", 
-		"upvote/:id":"upvote",
-		"downvote/:id":"downvote"
-	   },
-
-            home:function() {
-              new HomeView();
-            },
-
-            add:function() {
-              new AddView({collection:movies});
-            },
-
-            update:function(e) {
-              model = movies.get(e);
-              new UpdateView({model: model});
-            },
-
-	    delete:function(e){
-		model = movies.get(e);
-		model.destroy();
-	    },
-
-	    upvote:function(e) {
-              model = movies.get(e);
-                newvotes = model.get('votes')+1;
-                model.save({votes: newvotes},{
-                success: function(model) {}
-              });
-              return this;
-            },
-
-	    downvote:function(e) {
-              model = movies.get(e);
-                newvotes = model.get('votes')-1;
-                model.save({votes: newvotes},{
-                success: function(model) {}
-              });
-              return this;
-            },
- 
-          });
-
-        }(jQuery));
-
-        $(document).ready(function () {
-            movieApp = new AppRouter();
-            Backbone.history.start();           
-        });
-
-
-		</script>
+		<script type="text/javascript" src="js/main-movie.js"></script>
 
     <script type="text/template" id="item-home">
       <div class="container">
@@ -281,9 +55,8 @@
         <div class="row">
 <!--    <a href="javascript:void(0);" id="login">Login with Facebook</a>-->
 	    <div id="fb-root"></div>
-          <div class="span4 mainlist">
-                
-          </div>
+	    <div class="span4 userdiv"></div>
+	    <div class="span4 mainlist"></div>
         </div>
       </div>
     </script>
@@ -318,6 +91,29 @@
 	    <span class="delete">&nbsp;&nbsp;&nbsp;&nbsp;[<a href="#delete/<%= movies_id %>">delete</a>]</span>
 	</li>
     </script>
+
+    <script type="text/template" id="user-signup">
+      <form class="form-horizontal" method="post">
+        <fieldset>
+          <legend>Create an account</legend>
+          <div class="control-group">
+            <label class="control-label" for="input01">Name:</label>
+            <div class="controls">
+              <input type="text" class="input-xlarge addName" id="name" name="name" value="<%= name %>">
+            </div>
+          </div>
+          <div class="control-group">
+
+            <div class="controls">
+               <a href="#" id="cancelBtn" class="btn">close</a>
+               <a href="#" id="saveBtn" class="btn">save</a>
+            </div>
+          </div>
+
+        </fieldset>
+      </form>
+    </script>
+
 </head> 
 
 
